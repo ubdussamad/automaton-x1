@@ -9,6 +9,8 @@
 
 #include <ESP8266WiFi.h>
 #include <FS.h>
+#include "tools.h"
+#include "prototypes.h"
 
 /* PRODUCT CONFIG BLOCK */
 #define PRODUCT_NAME "AutomatonX1\n"

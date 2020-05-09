@@ -2,7 +2,7 @@
 
 Codebase and Hardware layouts for the Automaton X1 Project
 
-Copyright: Mohammmed S. <ubdussamad@gmail.com> 2019
+Copyright: 2019 Mohammmed S. <ubdussamad@gmail.com>
 
 This repository is published under Apache License.
 

@@ -1,3 +1,14 @@
+/*
+  Automaton X1 - Tooling
+  EMD Subsystems
+  Version : 1.0
+  Rev: 3
+  Ref: 24APR20
+  Author: ubdussamad <ubdussamad@gmail.com>
+*/
+
+//# include "config.h"
+
 /* Routine for Connecting to a AP Station. */
 void connect_to_station (const String& SSID ,const String&  PSK ){
   LOG(F("Connecting to custom AP: "));
@@ -63,7 +74,8 @@ void requestHandler ( const String& requestHeader , WiFiClient * client ) {
   if (requestHeader.indexOf(F("/burncred"))>0) {
     int headIndex = requestHeader.indexOf("afstass%32idqmAx5rew");
     int tailIndex = requestHeader.indexOf("ffpskstajzBw%203uA");
-    String dataBuffer = requestHeader.substring(headIndex+20,tailIndex).replace("%20"," ");
+    String dataBuffer = requestHeader.substring(headIndex+20,tailIndex);
+    dataBuffer.replace("%20"," ");
     if (DEBUG) {LOG("CP: burncread : ");LOG(dataBuffer);}
     File f = SPIFFS.open( STA_SETTING_FILE , "w");
     if (!f) {LOG("\nERROR:022 - LEVEL: Critical!");return;}

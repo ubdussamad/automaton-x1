@@ -8,12 +8,12 @@ This repository is published under Apache License.
 ## Development History:
 
 Last In use System:
-Firmware: Version 0.3 / Rev 2 (REF 27NOV19)
-Hardware: Version 2 / Rev 0 (REf 27NOV19)
+Firmware: Version 0.3 / Rev 2 (Ref 27NOV19)
+Hardware: Version 2 / Rev 0 (Ref 27NOV19)
 
 Current In Development Version:
-Firmware: Version 1 / Rev 03 (Target) (Partial REF 24APR20)
-Hardware: Version 3 / Rev 0 (Target)
+Firmware: Version 1 / Rev 03 (*Target*) (*Partial REF 24APR20*)
+Hardware: Version 3 / Rev 0 (*Target*)
 
 ## NOTES [Checklist before Flashing]:
 
@@ -85,3 +85,10 @@ Hardware: Version 3 / Rev 0 (Target)
 
   Example:
   FAN,LIGHT,SOCKET_1,REACTOR_CORE,......
+
+
+## Goals
+
+* Impliment true relay control, by reading final hardware state data.
+* Impliment Some sort of authentication for all actions.
+* Impliment WAN based relay control intead of relying on just LAN.

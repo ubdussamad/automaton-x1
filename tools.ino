@@ -7,8 +7,6 @@
   Author: ubdussamad <ubdussamad@gmail.com>
 */
 
-//# include "config.h"
-
 /* Routine for Connecting to a AP Station. */
 void connect_to_station (const String& SSID ,const String&  PSK ){
   LOG(F("Connecting to custom AP: "));

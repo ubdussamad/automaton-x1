@@ -18,8 +18,9 @@
 #define REF "24APR20\n"
 #define UID "002\n"
 
+
 #define RELAY_COUNT 3
-int GPIOS[8] = {4 , 5 , 14};// , 12 , 13 };
+int GPIOS[RELAY_COUNT] = {4 , 5 , 14};// , 12 , 13 };
 
 
 /* TIMEOUTS AND CONFIG [SUBJECT TO CHANGE DURING PRODUCTION] */

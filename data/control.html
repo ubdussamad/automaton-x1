@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="ubdussamad [ubdussamad@gmail.com]" >
+    <title>Control X1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css" media="screen">
+    html {
+        background-color: rgb(195, 200, 194);
+    }
+    .center-1 { 
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items:center;
+        align-content: center;
+        }
+    .item { 
+        flex-grow: 1;
+        flex-wrap:nowrap;
+        justify-content: center;
+        align-self:center;
+        background-color: khaki;
+        border: 10px solid;
+        }
+
+    h1 {
+        font:bold 40px "Courier New", Courier, monospace;
+        color: grey;
+    }
+
+    h4 {
+        font: bold 19px "Courier New", Courier, monospace;
+        color: #4469a3;
+        text-align: center;
+    }
+
+    button {
+        border-radius: 15px;
+        padding:10px;
+        width: 90px;
+        margin-top:10px;
+        font-weight: 400;
+        display:none;
+    }
+
+    button:focus , button.focus {
+        outline: 0;
+        box-shadow: none!important;
+    }
+
+    .footer {
+        font:900 10px/12px 'Courier New' , Courier, monospace;
+        margin-top: 80px;
+        color: #8a8799
+        
+    }
+    .state-indicator {
+        background-color:grey;/*rgb(100, 200, 100);*/
+        color: grey;/*rgb(82, 209, 82); */
+        margin: 0 0 0 0;
+        margin-left:15px;
+        font-size: 3px;
+        width:35px;
+        border: 0.5px solid grey;
+        border-radius: 5px;}
+
+    .config-btn {
+        color:rgb(65, 70, 78);
+        height:25;
+    }
+
+    </style>
+
+<script type="text/javascript">
+    
+    // GPIO4,5,14;STATE1,0,0;
+    window.onload = loadStates("-1");
+
+    function loadStates(id) {
+        let request = new XMLHttpRequest();
+        console.log("Requesting.");
+        if (id == "-1") {
+            request.open('GET', "/response"+"?t=" + Math.random()); // This will ask for pin status initially
+        }
+        else {
+            request.open('GET', "/response"+"?t=" + Math.random());//"/gpio/P".replace("P",id)); // This will toggle the Pin (GPIO)
+        }
+        request.responseType = 'text';
+        request.onload = function() {
+            var raw_response = request.response;
+            raw_response = raw_response.split('\n',4)[3]; //Recheck
+            console.log(raw_response);
+            var gpio_ids = raw_response.slice( 0, raw_response.indexOf(';') ).split(',');
+            var gpio_states = raw_response.slice(raw_response.indexOf(';')+1, raw_response.lastIndexOf(';')).split(',');
+            console.log ( gpio_states );
+
+
+            for (index = 0; index < gpio_states.length; index++) {
+                console.log("state-indicator-X".replace("X", index))
+                document.getElementById("btn-X".replace("X",index)).value = gpio_ids[index]; 
+                document.getElementById("btn-X".replace("X",index)).style = "display:inherit;";
+                if ( gpio_states[index] == "0") {
+                    document.getElementById("state-indicator-X".replace("X",index)).style = "background-color:rgb(250,100,100);";
+                }
+                else if ( gpio_states[index] == "1") {
+                    document.getElementById("state-indicator-X".replace("X", index)).style = "background-color:rgb(100, 200, 100);;";
+                }
+                else {
+                    document.getElementById("state-indicator-X".replace("X", index)).style = "background-color:grey;";
+                }
+            } 
+        };
+        request.send();
+    }
+
+
+    function toggle( id ) {
+        loadStates(id);
+        return;
+    }
+
+
+</script>
+
+
+</head>
+<body>
+    <div class="center-1">
+
+        <div class=".item">
+        <h1> Control X1 </h1>
+        <h4> PLC - Controller </h4>
+        </div>
+
+        <div id="btn-container" class=".item">
+            <button id="btn-0" value="-1" title="Toggle Socket" onclick="toggle('0')">
+                SOCKET
+                <p class="state-indicator" id="state-indicator-0">.</p>
+            </button>
+
+            <button id="btn-1" value="-1" title="Toggle Lights" onclick="toggle('1')">
+                LIGHTS
+                <p class="state-indicator" id="state-indicator-1">.</p>
+            </button>
+
+            <button id="btn-2" value="-1" title="Toggle FAN" onclick="toggle('2')">
+                FAN
+                <p class="state-indicator" id="state-indicator-2">.</p>
+            </button>
+
+            <button id="btn-3" value="-1" title="Toggle NA" onclick="toggle('3')">
+                NU
+                <p class="state-indicator" id="state-indicator-3">.</p>
+            </button>
+
+            <button id="btn-4" value="-1" title="Toggle NA" onclick="toggle('4')">
+                NA
+                <p class="state-indicator" id="state-indicator-4">.</p>
+            </button>
+
+            <button id="btn-5" value="-1" title="Toggle NA" onclick="toggle('5')">
+                NA
+                <p class="state-indicator" id="state-indicator-5">.</p>
+            </button>
+
+            <button id="btn-6" value="-1" title="Toggle NA" onclick="toggle('6')">
+                NA
+                <p class="state-indicator" id="state-indicator-6">.</p>
+            </button>
+
+            <button id="btn-7" value="-1" title="Toggle NA" onclick="toggle('7')">
+                NA
+                <p class="state-indicator" id="state-indicator-7">.</p>
+            </button>
+            <button class="config-btn" style = "display:inherit;" title="Open Settings" onclick = "window.location.href='response'">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
+                WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AQXEBEMPwb2mQAAAd9JREFUSMft1TtszmEUBvBftbTV
+                VtUtJKgBZTOIkAgDg61usRglYiFqEaNLXEJcYxUGjYS1gwiRYCAxmCQGl7CKREnQai3Pl7z58qX9
+                qhFLT/Ll/57zvf/znuc8z3n/TNk/sGloqYq1JD6uNdSxZye2YhBHi/hZtOMx7k0GwUZczroLN7AP
+                tzA78WtYP5lDFuJCFfLpVW26gnl/k3w12nAe87Ece9CJnuxZhRVYkH2dWFMvJ7uwPetj6MAmDAXF
+                EJowgjkYwGecxDCe4+Z4Krpe+CtxELuDrLR29ObXU8SvorE6aWnNqao1/gw8xQN8D/JleX5LvL1o
+                00x8CeIxrQn9RSv3F609nHVf8f+B4t3btSioNUzDeBYUUjF0R84NuBRfKq904QVG6zkE1oZgBRcf
+                cCRJ+uKLqprxE+vqkW5L5NgVfy8OFRyVnFQK2BwpixJPV19B1Uh+FeTBS7zBliQcxfs827Ahra2g
+                HcxBQ9UklzaChzgXNV1MITuCZkkO7cYnvEqr3gVBa9T4u0zaWKNlr7PpSYZxAG8xCz+wNIlaU/FX
+                nIgoPuL+RK+XuVXDWeuWOBWEY074WLYow1aR6J0oq7/goQOLJ/s96cW23ATHC1LP5Lp/hLv//cs4
+                ZROyP8wqWDrN15N3AAAAAElFTkSuQmCC">
+            </button>
+
+        </div>
+        <br/>
+        <br/>
+        <div id="footer" class=".item">
+            <p class="footer"> Automaton X1 - 1V0R03REF1720.<br/>
+                Automation Series Product Line.<br/>
+                <a style="color: rgb(68, 105, 163);">EMD SUBSYSTEMS</a> <br/>
+                </p>
+        </div>
+        
+    </div>
+</body>
+
+
+</html>

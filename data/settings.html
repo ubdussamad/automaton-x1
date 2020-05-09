@@ -1,0 +1,123 @@
+<!DOCTYPE HTML><html>
+<head> <title> Automatonx1 - EMD Subsystems </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	
+	function check_form ( )   { 
+
+		var ssid = document.getElementById('ssid')
+		var psk = document.getElementById("psk")
+		var psk_re = document.getElementById('psk_re')
+		var error = document.getElementById('error')
+
+		messages = []
+
+		if (ssid.value === '' || ssid.value == null) {
+		    messages.push('SSID/Hotspot\'s name is required.')
+		    console.log("HI")
+		  }
+
+		if (psk.value === '' || psk.value == null) {
+		    messages.push('Password is required.')
+		    console.log("Paswords can't be empty.")
+		  }
+
+
+		if (psk.value != psk_re.value ) {
+		    messages.push('Passwords do not match.')
+		  }
+
+		if (psk.length < 8) {
+			messages.push('Password must not be less than 8 characters.')
+		}
+
+		if (messages.length > 0) {
+			error.style.display = "inherit"
+		    error.innerHTML = messages.join(', ');
+		  }
+
+		else {
+		  	console.log("Sucess.........")
+		  	window.location.href = './config/set_credentials/'+ssid.value.replace(" ","%20")+"/"+psk.value.replace(" ","%20");
+		  }
+
+		return(false);
+		
+	}
+
+
+</script>
+
+</head>
+<body style="background: #F2F6DF;">
+
+<br/>
+<div class = "row">
+
+
+	<div class="col-md-6 col-md-offset-3"  style="background: rgb(180,200,200);border-radius: 6px;">
+		<br/>
+		<br/>
+	<h2 style="color: rgb(100,100,100); " align="center">AutomatonX1</h2>
+	<h4 style="color: white; " align="center">Automation Series Product Line</h4>
+	<h5 class="col-md-6 col-md-offset-3" style="padding: 4px;color:rgb(255,255,255);background: grey;border-radius: 6px;" align="center" > <a href="." style=";color:rgb(255,255,255);">< Back </a> </h5> 
+
+
+
+	<div class="row">
+
+
+		<div class="col-md-6 col-md-offset-3"  style="background: rgb(230, 230, 230);border-radius: 9px;padding: 68px;">
+
+		
+
+		<h3 align="center"> Settings </h3>
+
+		<p> Here you can change the Wifi router that the switch should connect to: </p>
+
+		<div id="error" style="display: none;padding:6px;color:rgb(255,255,255);background: rgb(255,180,180);border-radius: 4px;"> 
+			<br/>
+			Error
+			<br/>
+		</div>
+
+		<br/>
+		 <form id="form" onsubmit=" event.preventDefault();return check_form();">
+		  
+		  <div class="form-group">
+		    <label for="ssid">Hotsopt's Name</label>
+		    <input class="form-control" id="ssid"  placeholder="Enter SSID" required>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="psk">Password</label>
+		    <input type="password" class="form-control" id="psk" placeholder="Password">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="psk_re">Re-enter Password</label>
+		    <input type="password" class="form-control" id="psk_re" placeholder="Password">
+		  </div>
+
+		  <button type="submit" class="btn btn-success btn-block">Submit</button>
+		</form>
+
+		<br> <br>
+
+		</div>
+
+	</div>
+
+	<br><br>
+
+</div>
+</div>
+
+
+</body>
+</html>

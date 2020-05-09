@@ -34,7 +34,7 @@ void setup() {
         ));
   
   // Mounting the file system.
-  LOGL("FS_INIT: "+ SPIFFS.begin() ? "\nSucess":"\nFailed");
+  LOGL("FS_INIT: "+ (SPIFFS.begin() ? "\nSucess":"\nFailed"));
 
   /* Fetching Relay Sates */
   LOG("Loading last Relay Sates: ");
@@ -43,7 +43,7 @@ void setup() {
   else { int i=0;
   while ( relay_states_f.available()) {
     pinMode( GPIOS[i] , OUTPUT);
-    digitalWrite( GPIOS[i], (char)relay_states_f.read() == '1' ? 1 : 0 );i++;}
+    digitalWrite( GPIOS[i], (((char)relay_states_f.read() == '1') ? 1 : 0) );i++;}
   relay_states_f.close();
   LOG("Sucess.");
   }
@@ -51,10 +51,10 @@ void setup() {
   /* Loading Relay Names. */
   LOG("Reading Relay Names:");
   if (SPIFFS.exists(RELAY_NAME_FILE)) {
-    int index = 0;char iter;
+    int index = 0;
     File relayNameFile = SPIFFS.open(RELAY_NAME_FILE,"r");
     while ( relayNameFile.available() ){
-      iter = (char) relayNameFile.read();
+      char iter = (char) relayNameFile.read();
       if (iter==','){index++;continue;}
       pinNames[index]+=iter;
     }
@@ -78,8 +78,8 @@ void setup() {
   if (SPIFFS.exists(STA_SETTING_FILE)) {
     LOGL("Custom AP Read/Verify: ");
     File fObj = SPIFFS.open(STA_SETTING_FILE, "r");
-    bool switch_ = true;char iter;
-    while (fObj.available()){iter = (char)fObj.read();
+    bool switch_ = true;
+    while (fObj.available()){char iter = (char)fObj.read();
     if (iter=='\n') {switch_ = false;continue;}
     if (switch_) { SSID += iter;}else { PSK += iter; }
     }fObj.close();

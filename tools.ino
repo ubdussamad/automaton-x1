@@ -109,7 +109,7 @@ String register_switch_states(void) {
   String buffer,returnBuffer;
   for (  int i=0; i < RELAY_COUNT ; i++ ) {
     buffer += digitalRead(GPIOS[i]) ? '1' : '0';
-    returnBuffer += pinNames[i]+":"+digitalRead(GPIOS[i]) ? "1," : "0,";
+    returnBuffer += pinNames[i]+":"+(digitalRead(GPIOS[i]) ? "1," : "0,");
   }
   /* Write the config file with the constant data. */
   File f = SPIFFS.open( RELAY_STATE_FILE , "w");

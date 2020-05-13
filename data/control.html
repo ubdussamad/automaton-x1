@@ -7,6 +7,7 @@
     <meta name="author" content="ubdussamad [ubdussamad@gmail.com]" >
     <title>Control X1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <style type="text/css" media="screen">
     html {
         background-color: rgb(195, 200, 194);
@@ -73,6 +74,8 @@
         height:25;
     }
 
+    
+
     </style>
 
 <script type="text/javascript">
@@ -101,6 +104,7 @@
 
             for (index = 0; index < gpio_states.length; index++) {
                 console.log("state-indicator-X".replace("X", index))
+                document.getElementById("btn-name-X".replace("X",index)).InnerHTML = gpio_ids[index];
                 document.getElementById("btn-X".replace("X",index)).value = gpio_ids[index]; 
                 document.getElementById("btn-X".replace("X",index)).style = "display:inherit;";
                 if ( gpio_states[index] == "0") {
@@ -128,6 +132,8 @@
 
 
 </head>
+
+
 <body>
     <div class="center-1">
 
@@ -138,42 +144,42 @@
 
         <div id="btn-container" class=".item">
             <button id="btn-0" value="-1" title="Toggle Socket" onclick="toggle('0')">
-                SOCKET
+                <p id="btn-name-0">SOCKET </p>
                 <p class="state-indicator" id="state-indicator-0">.</p>
             </button>
 
             <button id="btn-1" value="-1" title="Toggle Lights" onclick="toggle('1')">
-                LIGHTS
+                <p id="btn-name-1">LIGHTS </p>
                 <p class="state-indicator" id="state-indicator-1">.</p>
             </button>
 
             <button id="btn-2" value="-1" title="Toggle FAN" onclick="toggle('2')">
-                FAN
+                <p id="btn-name-2">FAN </p>
                 <p class="state-indicator" id="state-indicator-2">.</p>
             </button>
 
             <button id="btn-3" value="-1" title="Toggle NA" onclick="toggle('3')">
-                NU
+                <p id="btn-name-3">NU </p>
                 <p class="state-indicator" id="state-indicator-3">.</p>
             </button>
 
             <button id="btn-4" value="-1" title="Toggle NA" onclick="toggle('4')">
-                NA
+                <p id="btn-name-4">NA </p>
                 <p class="state-indicator" id="state-indicator-4">.</p>
             </button>
 
             <button id="btn-5" value="-1" title="Toggle NA" onclick="toggle('5')">
-                NA
+                <p id="btn-name-5">NA </p>
                 <p class="state-indicator" id="state-indicator-5">.</p>
             </button>
 
             <button id="btn-6" value="-1" title="Toggle NA" onclick="toggle('6')">
-                NA
+                <p id="btn-name-6">NA </p>
                 <p class="state-indicator" id="state-indicator-6">.</p>
             </button>
 
             <button id="btn-7" value="-1" title="Toggle NA" onclick="toggle('7')">
-                NA
+                <p id="btn-name-7">NA </p>
                 <p class="state-indicator" id="state-indicator-7">.</p>
             </button>
             <button class="config-btn" style = "display:inherit;" title="Open Settings" onclick = "window.location.href='response'">

@@ -1,123 +1,202 @@
-<!DOCTYPE HTML><html>
-<head> <title> Automatonx1 - EMD Subsystems </title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- /*Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="ubdussamad [ubdussamad@gmail.com]" >
+    <title>Control X1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style type="text/css" media="screen">
+    html {
+        background-color: rgb(195, 200, 194);
+    }
+    .center-1 { 
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items:center;
+        align-content: center;
+        }
+    .item { 
+        flex-grow: 1;
+        flex-wrap:nowrap;
+        justify-content: center;
+        align-self:center;
+        align-items: center;
+        align-content: center;
+      }
 
-<script type="text/javascript">
-	
-	function check_form ( )   { 
+    h1 {
+        font: bold 40px "Courier New", Courier, monospace;
+        color: rgb(240,240,230);
+        margin-bottom: 0px;
+    }
 
-		var ssid = document.getElementById('ssid')
-		var psk = document.getElementById("psk")
-		var psk_re = document.getElementById('psk_re')
-		var error = document.getElementById('error')
+    .fake-btn {
+        font: bold 23px "Courier New", Courier, monospace;
+        color: #4469a3;
+        margin-bottom: 9px;
+        margin-top: 4px;
+        padding:10px;
+        background-color: rgb(226, 225, 232);
+        border-radius: 3px;
+        text-shadow: 2px;
+        align-self: center;
+        box-shadow: inset 1px 1px 2px #eee;
+    }
 
-		messages = []
+    .fake-btn:hover {
+        background-color: rgb(203, 205, 212);
+    }
 
-		if (ssid.value === '' || ssid.value == null) {
-		    messages.push('SSID/Hotspot\'s name is required.')
-		    console.log("HI")
-		  }
+    h4 {
+        font: bold 23px "Courier New", Courier, monospace;
+        color: #4469a3;
+        text-align: left;
+        margin-top:0px;
+    }
 
-		if (psk.value === '' || psk.value == null) {
-		    messages.push('Password is required.')
-		    console.log("Paswords can't be empty.")
-		  }
+    h5 {
+        color:grey;
+        font: bold 15px "Courier New", Courier, monospace;
+        padding:0%;
+        margin-top:0;
+        margin-bottom: 0;
+    }
 
+    #settings-nav {
+    	/* border: 2px solid #eaeaea; */
+    	width: 65%;
+    	padding:14px;
+    	height: 60%;
+    	border-radius: 19px;
+    	/* background-color: #f7f7f7; */
+        display:none;
+    	box-shadow: inset 2px 2px 3px #b4b4b4;
+    }
 
-		if (psk.value != psk_re.value ) {
-		    messages.push('Passwords do not match.')
-		  }
+    .input-field {
+        color:grey;
+        font: bold 0.6cm "Courier New", Courier, monospace;
+        /* font-size: 0.6cm; */
+        border-radius: 3px;
+        /* margin:8px; */
+        border-radius: 7px;
+        margin-bottom: 3px;;
+        padding: 2px;
+        /* width:89%; */
+    }
 
-		if (psk.length < 8) {
-			messages.push('Password must not be less than 8 characters.')
-		}
+    #station-setting {
+        color:#4469a3;
+        box-shadow: inset 2px 2px 3px #b4b4b4;
+        border-radius: 9px;
+        padding:13px;
+        background-color: rgb(182, 188, 192);
+        width:80%;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        padding-left:30%;
+        
+    }
+    
+    .top-info {
+        font: 12px "Courier New", Courier, monospace;
+        /* padding-left:10px; */
+        font-weight: 600;
+        color: black;
+        padding:8px;
+        /* margin-left: 8px; */
 
-		if (messages.length > 0) {
-			error.style.display = "inherit"
-		    error.innerHTML = messages.join(', ');
-		  }
+    }
+    .x {
+        /* margin-left: 8px; */
+        color:rgb(90, 85, 85);
+        font-size: 15px;
+    }
 
-		else {
-		  	console.log("Sucess.........")
-		  	window.location.href = './config/set_credentials/'+ssid.value.replace(" ","%20")+"/"+psk.value.replace(" ","%20");
-		  }
+    .btn-sub {
+        color:grey;
+        font: bold 19px "Courier New", Courier, monospace;
+        border-radius: 6px;
+        padding:4px;
+        margin:8px;
+        /* width:40%; */
+    }
+    
+    .btn-bak {
+        color:grey;
+        font: bold 19px "Courier New", Courier, monospace;
+        border-radius: 6px;
+        padding:4px;
+        margin:8px;
+        /* width:40%; */
+    }
 
-		return(false);
-		
-	}
+    </style>
 
-
-</script>
-
+    <script type="text/javascript">
+        function launch ( action ){
+            if (!action) {
+                document.getElementById("settings-nav").style = "display:none;";
+                console.log("minimized");[]
+            }
+            
+        }
+    </script>
 </head>
-<body style="background: #F2F6DF;">
 
-<br/>
-<div class = "row">
+<body>
 
+	<div class="center-1">
+		<div class="item">
+		 <h1> Settings </h1>
+		 <h4> Control-X1 </h4>
+        </div>
+        
+		<div class="item" id="settings-nav">
+            <div class="fake-btn" onclick="launch(0)">
+                Station
+                <h5> Select Wifi to connect.</h5>
+			</div class="fake-btn">
+			<div class="fake-btn" onclick="launch(1)" >
+                Personalize
+                <h5> Change relay names.</h5>
+            </div class="fake-btn">
+			<div class="fake-btn" onclick="launch(2)" >
+                Help
+                <h5> Usage.</h5>
+            </div class="fake-btn">
+			<div class="fake-btn" onclick="launch(3)" >
+                Information
+                <h5> Device Information.</h5>
+            </div class="fake-btn">
+            <div class="fake-btn" onclick="launch(4)"  style="color: #cc8181;">
+                Restart
+            </div>
+        </div>
+    
 
-	<div class="col-md-6 col-md-offset-3"  style="background: rgb(180,200,200);border-radius: 6px;">
-		<br/>
-		<br/>
-	<h2 style="color: rgb(100,100,100); " align="center">AutomatonX1</h2>
-	<h4 style="color: white; " align="center">Automation Series Product Line</h4>
-	<h5 class="col-md-6 col-md-offset-3" style="padding: 4px;color:rgb(255,255,255);background: grey;border-radius: 6px;" align="center" > <a href="." style=";color:rgb(255,255,255);">< Back </a> </h5> 
-
-
-
-	<div class="row">
-
-
-		<div class="col-md-6 col-md-offset-3"  style="background: rgb(230, 230, 230);border-radius: 9px;padding: 68px;">
-
-		
-
-		<h3 align="center"> Settings </h3>
-
-		<p> Here you can change the Wifi router that the switch should connect to: </p>
-
-		<div id="error" style="display: none;padding:6px;color:rgb(255,255,255);background: rgb(255,180,180);border-radius: 4px;"> 
-			<br/>
-			Error
-			<br/>
-		</div>
-
-		<br/>
-		 <form id="form" onsubmit=" event.preventDefault();return check_form();">
-		  
-		  <div class="form-group">
-		    <label for="ssid">Hotsopt's Name</label>
-		    <input class="form-control" id="ssid"  placeholder="Enter SSID" required>
-		  </div>
-
-		  <div class="form-group">
-		    <label for="psk">Password</label>
-		    <input type="password" class="form-control" id="psk" placeholder="Password">
-		  </div>
-
-		  <div class="form-group">
-		    <label for="psk_re">Re-enter Password</label>
-		    <input type="password" class="form-control" id="psk_re" placeholder="Password">
-		  </div>
-
-		  <button type="submit" class="btn btn-success btn-block">Submit</button>
-		</form>
-
-		<br> <br>
-
-		</div>
-
-	</div>
-
-	<br><br>
-
-</div>
-</div>
-
+        <div class="item" id="station-setting">
+            <p class="top-info">
+                This setting changes the default Wifi <br/>
+                station that your smart switch connects to.
+            </p>
+            <h5 class='x'> Station Name </h5>
+            <input class="input-field" type="text" id="sta-ssid"> <br/>
+            <h5 class="x"> Password</h5>
+            <input class="input-field" type="password" id="sta-pass"> <br/>
+            <h5 class="x"> Re-enter password</h5>
+            <input class="input-field" type="password" id="sta-pass-2"> <br/>
+            <button class="btn-sub" onclick="change_sta()">Submit</button>
+            <button class="btn-bak" onclick="back()">Back</button>
+        </div>
+        
+    </div>
+    
 
 </body>
 </html>

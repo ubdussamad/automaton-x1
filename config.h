@@ -29,7 +29,7 @@ int GPIOS[RELAY_COUNT] = {4 , 5 , 14};// , 12 , 13 };
 
 /* DEFAULTs [SUBJECT TO CHANGE DURING PRODUCTION] */
 #define DEFAULT_STA_SSID "Galaxy A50"
-#define DEFAULT_STA_PSK "zebrafamily"
+#define DEFAULT_STA_PSK "cicada3301"
 #define STA_SETTING_FILE "/credentials.config"
 #define RELAY_STATE_FILE "/states.config"
 #define RELAY_NAME_FILE "/relayNames.config"

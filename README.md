@@ -1,5 +1,7 @@
 # Automaton X1
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9d0d84b2bdd04276a86919ae32953484)](https://app.codacy.com/manual/ubdussamad/automaton-x1?utm_source=github.com&utm_medium=referral&utm_content=ubdussamad/automaton-x1&utm_campaign=Badge_Grade_Dashboard)
+
 Codebase and Hardware layouts for the Automaton X1 Project
 
 Copyright: 2019 Mohammmed S. <ubdussamad@gmail.com>

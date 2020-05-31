@@ -73,6 +73,9 @@
         color:rgb(65, 70, 78);
         height:25;
     }
+    p {
+        margin:3px;
+    }
 
     
 
@@ -95,17 +98,19 @@
         request.responseType = 'text';
         request.onload = function() {
             var raw_response = request.response;
-            raw_response = raw_response.split('\n',4)[3]; //Recheck
-            console.log(raw_response);
+            raw_response = raw_response.split('\n',4)[3]; //Rewrite-the whole processing to fit the new scheme.
+            console.log(raw_response); // This is the state data
+            // Format is:
+            // [Pin_name][%xef][pin_id][:][pin_state][,].....[;]
             var gpio_ids = raw_response.slice( 0, raw_response.indexOf(';') ).split(',');
-            var gpio_states = raw_response.slice(raw_response.indexOf(';')+1, raw_response.lastIndexOf(';')).split(',');
+            var gpio_states = raw_response.slice(raw_response.indexOf(';')+1, raw_response.lastIndexOf(',')).split(',');
             console.log ( gpio_states );
 
 
             for (index = 0; index < gpio_states.length; index++) {
                 console.log("state-indicator-X".replace("X", index))
-                document.getElementById("btn-name-X".replace("X",index)).InnerHTML = gpio_ids[index];
-                document.getElementById("btn-X".replace("X",index)).value = gpio_ids[index]; 
+                document.getElementById("btn-name-X".replace("X",index)).InnerHTML = gpio_ids[index].split("%xef")[1];
+                document.getElementById("btn-X".replace("X",index)).value = gpio_ids[index].split("%xef")[0]; 
                 document.getElementById("btn-X".replace("X",index)).style = "display:inherit;";
                 if ( gpio_states[index] == "0") {
                     document.getElementById("state-indicator-X".replace("X",index)).style = "background-color:rgb(250,100,100);";
@@ -182,7 +187,7 @@
                 <p id="btn-name-7">NA </p>
                 <p class="state-indicator" id="state-indicator-7">.</p>
             </button>
-            <button class="config-btn" style = "display:inherit;" title="Open Settings" onclick = "window.location.href='settings.html'">
+            <button class="config-btn" style = "display:inherit;" title="Open Settings" onclick = "window.location.href='config'">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
                 WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AQXEBEMPwb2mQAAAd9JREFUSMft1TtszmEUBvBftbTV
                 VtUtJKgBZTOIkAgDg61usRglYiFqEaNLXEJcYxUGjYS1gwiRYCAxmCQGl7CKREnQai3Pl7z58qX9

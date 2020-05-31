@@ -10,30 +10,24 @@
     
     <style type="text/css" media="screen">
     html {
-        background-color: rgb(195, 200, 194);
-    }
+        background-color: rgb(195, 200, 194);}
     .center-1 { 
         display:flex;
         flex-direction:column;
         justify-content: center;
         align-items:center;
-        align-content: center;
-        }
+        align-content: center;}
     .item { 
         flex-grow: 1;
         flex-wrap:nowrap;
         justify-content: center;
         align-self:center;
         align-items: center;
-        align-content: center;
-      }
-
+        align-content: center;}
     h1 {
         font: bold 40px "Courier New", Courier, monospace;
         color: rgb(240,240,230);
-        margin-bottom: 0px;
-    }
-
+        margin-bottom: 0px;}
     .fake-btn {
         font: bold 23px "Courier New", Courier, monospace;
         color: #4469a3;
@@ -44,39 +38,37 @@
         border-radius: 3px;
         text-shadow: 2px;
         align-self: center;
-        box-shadow: inset 1px 1px 2px #eee;
-    }
-
+        box-shadow: inset 1px 1px 2px #eee;}
     .fake-btn:hover {
-        background-color: rgb(203, 205, 212);
-    }
-
+        background-color: rgb(203, 205, 212);}
     h4 {
         font: bold 23px "Courier New", Courier, monospace;
         color: #4469a3;
         text-align: left;
-        margin-top:0px;
-    }
-
+        margin-top:0px;}
     h5 {
         color:grey;
         font: bold 15px "Courier New", Courier, monospace;
         padding:0%;
         margin-top:0;
-        margin-bottom: 0;
-    }
-
+        margin-bottom: 0;}
     #settings-nav {
-    	/* border: 2px solid #eaeaea; */
     	width: 65%;
     	padding:14px;
     	height: 60%;
     	border-radius: 19px;
-    	/* background-color: #f7f7f7; */
-        /* display:none; */
-    	box-shadow: inset 2px 2px 3px #b4b4b4;
-    }
-
+    	box-shadow: inset 2px 2px 3px #b4b4b4;}
+    #station-setting-info {
+    	/* border: 2px solid #eaeaea; */
+        font: bold 16px "Courier New", Courier, monospace;
+    	width: 90%;
+    	padding:14px;
+    	height: 60%;
+    	border-radius: 10px;
+    	background-color: #c8c8c8;
+        display:none;
+        color:rgb(107, 105, 105);
+    	box-shadow: inset 2px 2px 3px #b4b4b4;}
     .input-field {
         color:rgb(82, 82, 82);
         background-color: #ffffff;
@@ -88,42 +80,31 @@
         margin-bottom: 3px;
         padding-left: 6px;
         border:#f5f5f5 2px solid;
-        padding: 3px;
-    }
-
+        padding: 3px;}
     #station-setting {
         color:#4469a3;
-        box-shadow: inset 4px 3px 3px #cacaca;
+        box-shadow: inset 4px 3px 3px #adadad;
         border-radius: 9px;
-        padding:13px;
+        padding:24px;
         margin:6px;
         background-color: #d4d4d4;
         justify-content: center !important;
         align-items: center !important;
         align-self: center !important;
-        display: none;
-
-        
-    }
-    
+        display: none;   }  
     .top-info {
         font-size: 12px;
         font-weight:800;
         text-align: center;
         font-family: 'Courier New', Courier, monospace;
-        /* padding-left:10px; */
+        display: none;
         font-weight: 600;
         color: rgb(240, 240, 227);
         padding:8px;
         border:rgb(233, 233, 216) solid 1px;
         background-color:rgb(236, 130, 130);
         border-radius: 5px;
-        word-wrap:normal;
-        /* padding:7px; */
-
-    }
-
-
+        word-wrap:normal;}
     .btn-bak {
         color:grey;
         /* background-color: rgb(137, 235, 175); */
@@ -131,9 +112,7 @@
         border-radius: 6px;
         border:none;
         padding:6px;
-        /* margin:8px; */
-    }
-    
+        /* margin:8px; */} 
     .btn-sub {
         color:rgb(236, 236, 236);
         font: bold 19px "Courier New", Courier, monospace;
@@ -142,13 +121,40 @@
         background-color: rgb(50, 160, 160);
 
         padding:6px;
-        margin-top:8px;
+        margin-top:8px;}
+    .btn-wot {
+        border-radius:7px;
+        margin-left:35%;
+        color:grey;
+        /* background-color: #293b57; */
+        border:#c2c0c0 1px solid;
+        font: bold 19px "Courier New", Courier, monospace;
     }
-
     </style>
 
     <script type="text/javascript">
+        function change_sta () {
+        console.log("Submitting....")
+        var sta_ssid = document.getElementById("sta-ssid").value.replace(" ","%20");
+        var sta_psk = document.getElementById("sta-pass").value.replace(" ","%20");
+        var sta_psk_re = document.getElementById("sta-pass-2").value.replace(" ","%20");
+        if (sta_psk != sta_psk_re && sta_psk.length !=8 ) {
+            alert("Passwords, do not match or too short. Please recheck.");
+            return;
+        }
+        let request = new XMLHttpRequest(); // Needs fixing.
+        request.open('GET', "/burncred/afstass%32idqmAx5rew"+sta_ssid+"%60e"+sta_psk+"ffpskstajzBw%903uA");
+        request.send();
+        document.getElementById("station-setting").style.display = "none";
+        document.getElementById("station-setting-info").style.display = "block";
+        return;
+
+
+    }
         function launch ( action ){
+            if (action==4) {
+                window.location = "/control.html";
+            }
             if (!action) {
                 document.getElementById("settings-nav").style = "display:none;";
                 document.getElementById("station-setting").style = "display:block;";
@@ -161,21 +167,38 @@
                 document.getElementById("settings-nav").style = "display:block;";
                 document.getElementById("station-setting").style = "display:none;";
                 console.log("minimized");[]
-            }
+            }   
+        } 
+        function wot ( action ) {
+            switch (action)
+            {
+                case 1:
+                    if (
+                        document.getElementById("top-info").style.display == "block"
+                    )
+                    {
+                        document.getElementById("top-info").style.display = "none";
+                    }
+                    else {
+                        document.getElementById("top-info").style.display = "block";
+                    }
+                    return;
+                    break;
             
+                default:
+                    break;
+            }
         }
-        
     </script>
 </head>
 
-<body>
 
+<body>
 	<div class="center-1">
 		<div class="item">
 		 <h1> Settings </h1>
 		 <h4> Control-X1 </h4>
-        </div>
-        
+        </div> 
 		<div class="item" id="settings-nav">
             <div class="fake-btn" onclick="launch(0)">
                 Station
@@ -193,12 +216,18 @@
                 Information
                 <h5> Device Information.</h5>
             </div>
-            <div class="fake-btn" onclick="launch(4)"  style="color: #cc8181;">
+            
+            <div class="fake-btn" onclick="launch(4)"  style="color: #575757;">
+            Back
+            </div>
+
+            <div class="fake-btn" onclick="launch(5)"  style="color: #cc8181;">
                 Restart
             </div>
-        </div>
-    
 
+
+
+        </div>
         <div class="item" id="station-setting">
             <h4 style="margin-bottom: 3px;color:rgb(107, 107, 107);text-align: center;">
                  X1-Station
@@ -208,15 +237,52 @@
             <!-- <h5 class="x"> Password</h5> -->
             <input class="input-field" placeholder="Password" type="password" id="sta-pass"> <br/>
             <!-- <h5 class="x"> Re-enter password</h5> -->
-            <input class="input-field" type="password" placeholder="Re-enter Password" id="sta-pass-2"> <br/>
+            <input class="input-field" style="margin-bottom: 30px;" type="password" placeholder="Re-enter Password" id="sta-pass-2"> <br/>
             <button class="btn-sub" onclick="change_sta()">Submit</button>
             <button class="btn-bak" onclick="back(0)">Back</button>
+            <button class="btn-wot" onclick="wot(1)">?</button>
 
             <br/>
-            <p class="top-info">
+            <p class="top-info" id="top-info">
                 This setting changes</br> the current Wifi 
                 your <br/>smart switch uses.
             </p>
+        </div>
+        <div class="item" id="station-setting-info">
+            <x style="color:rgb(94, 107, 148);font-weight: bold;font-size: 18px;">Your Wifi settings have changed.
+            </x>
+            <br/>
+            <br/>
+            This means that your smart switch will connect
+            to a new Wifi now, credentials of which you just
+            entered. Please find the switch's address through
+            your router (The one which it would now connect to)
+            by connecting your Phone/Computer to that network.
+            or use the App to discover your switch on that network.
+            <br/>
+            <br/>
+            Please note, if you entered the wrong credentials,
+            your smart switch will not be able to connect to it.
+            In that case it'll try to connect to the fallback Wifi
+            which you can simulate through your Phone. <br/>
+            <x style="color:rgb(104, 144, 224);font-size:18px;">The fallback SSID is: 
+                <x style="color:black;">Galaxy A50</x> <br/>
+            And the PSK is: <x style="color:black;">zebrafamily</x></x><br/>
+            After your switch connects to this network, you can change
+            the credentials again.
+            The deault AP will never change, so that you can recover
+            in any case.
+            If something is still not right, please contact the
+            installation company.
+            Thankyou.
+        </div>
+        <div class="item" id="relay_name_setting" style="display: none;">
+            You can chnage your relay names here. :)
+        </div>
+        <div class="item" id="footer" style="margin-top: 20px;vertical-align: baseline;
+        font-family: 'Courier New', Courier, monospace;font-size: 18px;font-weight: bold;
+        color:rgb(83, 82, 92)">
+            ©2020 <x style="color:#4469a3">EMD SUBSYSTEMS</x>.
         </div>
         
     </div>

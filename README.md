@@ -91,7 +91,7 @@ Hardware: Version 3 / Rev 0 (*Target*)
   FAN,LIGHT,SOCKET_1,REACTOR_CORE,......
 
 
-## Goals
+## Future Goals
 
 * Impliment true relay control, by reading final hardware state data.
 * Impliment Some sort of authentication for all actions.

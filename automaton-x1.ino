@@ -50,6 +50,7 @@ void setup() {
   }
 
   /* Loading Relay Names. */
+  /* The last comma should be trimmed. */
   LOG("Reading Relay Names:");
   if (SPIFFS.exists(RELAY_NAME_FILE)) {
     int index = 0;

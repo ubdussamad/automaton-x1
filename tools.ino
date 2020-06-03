@@ -89,13 +89,12 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
 
 
   if (requestHeader.indexOf(F("/burnnames")) > 0){
-    String buffer;
     int epch = requestHeader.indexOf(F("/burnnames/"));
     String dataBuffer = requestHeader.substring(epch); // Maybe it might need the end index
     File f = SPIFFS.open(RELAY_NAME_FILE, "w");
     if (!f) {
-      LOG("\nERROR:022 - LEVEL: Critical!");
-      return;
+      LOG("\nERROR:024 - LEVEL: Amber!");
+      placeturn;
     }
     f.print(dataBuffer);
     f.close();

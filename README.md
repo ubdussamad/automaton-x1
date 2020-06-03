@@ -87,6 +87,9 @@ Hardware: Version 3 / Rev 0 (*Target*)
 
   [Pin Name],[Pin Name],.......
 
+  Note: The file must have a comma at the end.
+
+
   Example:
   FAN,LIGHT,SOCKET_1,REACTOR_CORE,......
 

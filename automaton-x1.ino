@@ -50,7 +50,7 @@ void setup() {
   }
 
   /* Loading Relay Names. */
-  /* The last comma should be trimmed. */
+  /* The last comma should be trimmed whle storage. */
   LOG("Reading Relay Names:");
   if (SPIFFS.exists(RELAY_NAME_FILE)) {
     int index = 0;
@@ -131,7 +131,7 @@ void loop() {
   /* Disabling Nagle's packet buffering. */
   client.setNoDelay(true);
 
-  /* Simply Reading the header. */
+  /* Reading the URI only and discarding the rest of the header. */
   String requestHeader = client.readStringUntil('\r');
 
   /* Send the request to dedicated handler routine. */

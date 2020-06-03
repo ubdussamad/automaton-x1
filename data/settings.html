@@ -269,6 +269,8 @@
                     window.location = "/control.html";
                     break;
 
+                case 5:
+                    window.location = "/restart"
                 default:
                     break;
             }
@@ -325,12 +327,20 @@
         }
         function change_relay_names () {
             var inputs = document.getElementById("xxp");
+            var data = "";
             var fields = inputs.childNodes;
             for (let index = 0; index < fields.length; index++) {
                 if ( fields[index].tagName == "INPUT") {
-                console.log(index+":"+fields[index].value);
+                if (fields[index].value == '') {
+                    alert("Please fill in all the names and then submit.");
+                    return;
+                }
+                data += fields[index].value+",";
                 }
             }
+            let request = new XMLHttpRequest(); // Needs fixing.
+            request.open('GET', "/burnnames/" + data.slice(0,-1).split(" ").join("-"));
+            request.send();
         }
     </script>
 </head>
@@ -351,10 +361,10 @@
                 Personalize
                 <h5> Change relay names.</h5>
             </div>
-            <div class="fake-btn" onclick="launch(2)">
+            <!-- <div class="fake-btn" onclick="launch(2)">
                 Help
                 <h5> Usage.</h5>
-            </div>
+            </div> -->
             <div class="fake-btn" onclick="launch(3)">
                 Information
                 <h5> Device Information.</h5>

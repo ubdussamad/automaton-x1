@@ -108,8 +108,8 @@
 
 
             for (index = 0; index < gpio_states.length; index++) {
-                console.log("state-indicator-X".replace("X", index))
-                document.getElementById("btn-name-X".replace("X",index)).InnerHTML = gpio_ids[index].split("%xef")[1];
+                console.log("state-indicator-X".replace("X", index));
+                document.getElementById("btn-name-X".replace("X",index)).innerText = gpio_ids[index].split("%xef")[1]; 
                 document.getElementById("btn-X".replace("X",index)).value = gpio_ids[index].split("%xef")[0]; 
                 document.getElementById("btn-X".replace("X",index)).style = "display:inherit;";
                 if ( gpio_states[index] == "0") {

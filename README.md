@@ -83,7 +83,7 @@ Hardware: Version 3 / Rev 0 (*Target*)
     NOTE: In SSID&PSK , White Spaces are replaced with %20 .
 
 
-* PinNames File Format:
+* PinNames/Relay Names File Format:
 
   [Pin Name],[Pin Name],.......
 

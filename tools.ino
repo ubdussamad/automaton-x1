@@ -86,11 +86,30 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
     f.close();
     return;
   }
+
+
+  if (requestHeader.indexOf(F("/burnnames")) > 0){
+    String buffer;
+    int epch = requestHeader.indexOf(F("/burnnames/"));
+    String dataBuffer = requestHeader.substring(epch); // Maybe it might need the end index
+    File f = SPIFFS.open(RELAY_NAME_FILE, "w");
+    if (!f) {
+      LOG("\nERROR:022 - LEVEL: Critical!");
+      return;
+    }
+    f.print(dataBuffer);
+    f.close();
+
+
+  }
+
   /* Fall back to homepage. */
 
   (*client).print(F("<h1> Syserror, failed to load file.</h1>"));
   serveFile("/control.html", client);
 }
+
+
 
 /* Routine for reading a file (from flash) and relaying it to client. */
 void serveFile(const String &pathRefrence, WiFiClient *client) {

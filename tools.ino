@@ -46,6 +46,10 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
 
   if (index > 0) {
     int relayId = requestHeader.substring(index + 5).toInt();
+    if (DEBUG) {
+      LOG("Relay Triggred.");
+      LOGL(relayId);
+    }
     digitalWrite(relayId, !digitalRead(relayId));
     (*client).print(register_switch_states());
     return;
@@ -107,8 +111,6 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
   (*client).print(F("<h1> Syserror, failed to load file.</h1>"));
   serveFile("/control.html", client);
 }
-
-
 
 /* Routine for reading a file (from flash) and relaying it to client. */
 void serveFile(const String &pathRefrence, WiFiClient *client) {

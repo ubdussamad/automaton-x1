@@ -23,6 +23,7 @@ Hardware: Version 3 / Rev 0 (*Target*)
 
 * The uC must have a relay states file initially set to 00000 (V1REV3)
 * The uC also must have a Credentials File present set to default AP.(V1REV3)
+* The uC must have a relay names file, set to relay numbers.
 
 ## Schemes:
 

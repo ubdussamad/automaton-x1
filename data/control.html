@@ -90,10 +90,10 @@
         let request = new XMLHttpRequest();
         console.log("Requesting.");
         if (id == "-1") {
-            request.open('GET', "/response"+"?t=" + Math.random()); // This will ask for pin status initially
+            request.open('GET', "/stat"+"?t=" + Math.random()); // This will ask for pin status initially
         }
         else {
-            request.open('GET', "/response"+"?t=" + Math.random());//"/gpio/P".replace("P",id)); // This will toggle the Pin (GPIO)
+            request.open('GET', "/gpio/P".replace("P",id)); // This will toggle the Pin (GPIO)
         }
         request.responseType = 'text';
         request.onload = function() {

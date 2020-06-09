@@ -94,7 +94,7 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
     File f = SPIFFS.open(RELAY_NAME_FILE, "w");
     if (!f) {
       LOG("\nERROR:024 - LEVEL: Amber!");
-      placeturn;
+      return;
     }
     f.print(dataBuffer);
     f.close();

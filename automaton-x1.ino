@@ -7,9 +7,9 @@
   Author: ubdussamad <ubdussamad@gmail.com>
 */
 
+#include <ESP8266WiFi.h>
 #include "config.h"
 #include "tools.h"
-#include <ESP8266WiFi.h>
 #include <FS.h>
 
 /* INITIALIZING SERVER OBJECT */

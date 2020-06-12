@@ -6,6 +6,22 @@ Codebase and Hardware layouts for the Automaton X1 Project
 
 Copyright: 2019 Mohammmed S. <ubdussamad@gmail.com>
 
+var ids = [];function loadStates(id){let request = new XMLHttpRequest();
+if(id=="-1"){request.open('GET',"/response");}else{window.navigator.vibrate([35]);
+request.open('GET',"/gpioX".replace("X",ids[id]));}
+request.responseType='text';request.onload = function() {
+var rsp = request.response;if (id==-1) {rsp = rsp.split('\n',5)[4];}
+var gpd = rsp.split(',');var cnf = document.getElementById("confBtn");
+var cont = document.getElementById("btn-container");cont.innerHTML = "";
+for (i = 0; i < (gpd.length-1); i++){var state = gpd[i].split(":")[1];
+var identifier = gpd[i].split(":")[0].split("%xef");ids.push(identifier[0]);
+if (state=="0"){x = "#fa6464";}else if(state=="1"){x = "#64c864";}else{x="grey";}
+var btx = document.createElement("button");
+btx.addEventListener("click",function(){loadStates(i);});btx.innerText = identifier[1];
+var led = document.createElement("p");led.className = "si";led.style = "background-color:"+x;
+btx.appendChild(led);cont.appendChild(btx);}cont.appendChild(cnf);};request.send();}
+
+
 This repository is published under Apache License.
 
 
@@ -22,8 +38,8 @@ Hardware: Version 3 / Rev 0 (*Target*)
 ## NOTES [Checklist before Flashing]:
 
 * The uC must have a relay states file initially set to 00000 (V1REV3)
-* The uC also must have a Credentials File present set to default AP.(V1REV3)
-* The uC must have a relay names file, set to relay numbers.
+* The uC also must have a Credentials File present set to default AP.(V1REV3) k
+* The uC must have a relay names file, set to relay numbers. k
 
 ## Schemes:
 

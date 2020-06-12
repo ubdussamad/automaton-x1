@@ -1,218 +1,114 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="ubdussamad [ubdussamad@gmail.com]" >
-    <title>Control X1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <style type="text/css" media="screen">
-    html {
-        background-color: rgb(195, 200, 194);
-    }
-    .center-1 { 
-        display:flex;
-        flex-direction:column;
-        justify-content: center;
-        align-items:center;
-        align-content: center;
-        }
-    .item { 
-        flex-grow: 1;
-        flex-wrap:nowrap;
-        justify-content: center;
-        align-self:center;
-        background-color: khaki;
-        border: 10px solid;
-        }
-
-    h1 {
-        font:bold 40px "Courier New", Courier, monospace;
-        color: grey;
-    }
-
-    h4 {
-        font: bold 19px "Courier New", Courier, monospace;
-        color: #4469a3;
-        text-align: center;
-    }
-
-    button {
-        border-radius: 15px;
-        padding:10px;
-        width: 90px;
-        margin-top:10px;
-        font-weight: 400;
-        display:none;
-    }
-
-    button:focus , button.focus {
-        outline: 0;
-        box-shadow: none!important;
-    }
-
-    .footer {
-        font:900 10px/12px 'Courier New' , Courier, monospace;
-        margin-top: 80px;
-        color: #8a8799
-        
-    }
-    .state-indicator {
-        background-color:grey;/*rgb(100, 200, 100);*/
-        color: grey;/*rgb(82, 209, 82); */
-        margin: 0 0 0 0;
-        margin-left:15px;
-        font-size: 3px;
-        width:35px;
-        border: 0.5px solid grey;
-        border-radius: 5px;}
-
-    .config-btn {
-        color:rgb(65, 70, 78);
-        height:25;
-    }
-    p {
-        margin:3px;
-    }
-
-    
-
-    </style>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="ubdussamad@gmail.com" ><link rel="icon" href="data:image/png;base64,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
+RK5CYII=">
+<title>Control X1</title><meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css" media="screen">html{background:#dadada;}
+.center-1{display:flex;flex-direction:column;align-items:center;align-content: center;}
+.item { flex-grow: 1;align-self:center;}h1 {font:bold 40px "Courier New";color:grey;}
+h4 {font: bold 19px "Courier New";color: #4469a3;text-align: center;}
+button {display: block;border-radius: 14px;padding:10px;width: 90px;margin-top:10px;
+font-weight: 500;text-align:center;background:#d0d3d4;color:#646464}
+.footer {font:900 10px/12px 'Courier New';margin-top: 80px;color: #8a8799}
+.si {margin-left:15px;height:2px;width:35px;border: 0.5px solid grey;}
+.config-btn {color:#41464e;height:25;}p {margin:3px;}
+button:focus,button.focus{outline: 0;}</style>
 
 <script type="text/javascript">
+window.onload = function () { 
+    loadStates(-1);
+}
+
+var x = setInterval(function () { loadStates("-1") } , 10000);
+var ids = [];
+
+function loadStates(id) {
+    console.log("soT")
+    console.log(id,ids);
     
-    // GPIO4,5,14;STATE1,0,0;
-    window.onload = loadStates("-1");
-
-    function loadStates(id) {
-        let request = new XMLHttpRequest();
-        console.log("Requesting.");
-        if (id == "-1") {
-            request.open('GET', "/stat"+"?t=" + Math.random()); // This will ask for pin status initially
-        }
-        else {
-            request.open('GET', "/gpio/P".replace("P",id)); // This will toggle the Pin (GPIO)
-        }
-        request.responseType = 'text';
-        request.onload = function() {
-            var raw_response = request.response;
-            raw_response = raw_response.split('\n',4)[3]; //Rewrite-the whole processing to fit the new scheme.
-            console.log(raw_response); // This is the state data
-            // Format is:
-            // [Pin_name][%xef][pin_id][:][pin_state][,].....[;]
-            var gpio_ids = raw_response.slice( 0, raw_response.indexOf(';') ).split(',');
-            var gpio_states = raw_response.slice(raw_response.indexOf(';')+1, raw_response.lastIndexOf(',')).split(',');
-            console.log ( gpio_states );
-
-
-            for (index = 0; index < gpio_states.length; index++) {
-                console.log("state-indicator-X".replace("X", index));
-                document.getElementById("btn-name-X".replace("X",index)).innerText = gpio_ids[index].split("%xef")[1]; 
-                document.getElementById("btn-X".replace("X",index)).value = gpio_ids[index].split("%xef")[0]; 
-                document.getElementById("btn-X".replace("X",index)).style = "display:inherit;";
-                if ( gpio_states[index] == "0") {
-                    document.getElementById("state-indicator-X".replace("X",index)).style = "background-color:rgb(250,100,100);";
-                }
-                else if ( gpio_states[index] == "1") {
-                    document.getElementById("state-indicator-X".replace("X", index)).style = "background-color:rgb(100, 200, 100);;";
-                }
-                else {
-                    document.getElementById("state-indicator-X".replace("X", index)).style = "background-color:grey;";
-                }
-            } 
-        };
-        request.send();
+    let request = new XMLHttpRequest();
+    if (id == "-1") {
+        request.open('GET', "/stat");
+    } else {
+        window.navigator.vibrate([35]);
+        console.log("Sending: ","/gpioX".replace("X", ids[id]))
+        request.open('GET', "/gpioX".replace("X", ids[id]));
     }
-
-
-    function toggle( id ) {
-        loadStates(id);
-        return;
-    }
-
+    request.responseType = 'text';
+    request.onload = function() {
+        ids=[];
+        var rsp = request.response;
+        if (rsp.length > 1000 || rsp.length < 5) {
+            var x = document.getElementsByClassName('si');
+            for (var i=0; i < x.length;i++){
+                x[i].style="background-color:yellow;";
+            }
+            loadStates(-1);
+            return;
+            return;}
+        if (id == -1) {
+            rsp = rsp.split('\n', 5)[4];
+        }
+        var gpd = rsp.split(',');
+        var cnf = document.getElementById("confBtn");
+        var cont = document.getElementById("btn-container");
+        cont.innerHTML = "";
+        for (i = 0; i < (gpd.length - 1); i++) {
+            var state = gpd[i].split(":")[1];
+            var identifier = gpd[i].split(":")[0].split("%xef");
+            
+            ids.push(identifier[0]);
+            if (state == "0") {
+                x = "#fa6464";
+            } else if (state == "1") {
+                x = "#64c864";
+            } else {
+                x = "grey";
+            }
+            var btx = document.createElement("button");
+            btx.addEventListener("click", loadStates.bind(event,i) );
+            console.log(i);
+            btx.innerText = identifier[1];
+            var led = document.createElement("p");
+            led.className = "si";
+            led.style = "background-color:" + x;
+            btx.appendChild(led);
+            cont.appendChild(btx);
+        }
+        cont.appendChild(cnf);
+    };
+    request.send();
+}
 
 </script>
 
-
-</head>
-
-
-<body>
-    <div class="center-1">
-
-        <div class=".item">
-        <h1> Control X1 </h1>
-        <h4> PLC - Controller </h4>
-        </div>
-
-        <div id="btn-container" class=".item">
-            <button id="btn-0" value="-1" title="Toggle Socket" onclick="toggle('0')">
-                <p id="btn-name-0">SOCKET </p>
-                <p class="state-indicator" id="state-indicator-0">.</p>
-            </button>
-
-            <button id="btn-1" value="-1" title="Toggle Lights" onclick="toggle('1')">
-                <p id="btn-name-1">LIGHTS </p>
-                <p class="state-indicator" id="state-indicator-1">.</p>
-            </button>
-
-            <button id="btn-2" value="-1" title="Toggle FAN" onclick="toggle('2')">
-                <p id="btn-name-2">FAN </p>
-                <p class="state-indicator" id="state-indicator-2">.</p>
-            </button>
-
-            <button id="btn-3" value="-1" title="Toggle NA" onclick="toggle('3')">
-                <p id="btn-name-3">NU </p>
-                <p class="state-indicator" id="state-indicator-3">.</p>
-            </button>
-
-            <button id="btn-4" value="-1" title="Toggle NA" onclick="toggle('4')">
-                <p id="btn-name-4">NA </p>
-                <p class="state-indicator" id="state-indicator-4">.</p>
-            </button>
-
-            <button id="btn-5" value="-1" title="Toggle NA" onclick="toggle('5')">
-                <p id="btn-name-5">NA </p>
-                <p class="state-indicator" id="state-indicator-5">.</p>
-            </button>
-
-            <button id="btn-6" value="-1" title="Toggle NA" onclick="toggle('6')">
-                <p id="btn-name-6">NA </p>
-                <p class="state-indicator" id="state-indicator-6">.</p>
-            </button>
-
-            <button id="btn-7" value="-1" title="Toggle NA" onclick="toggle('7')">
-                <p id="btn-name-7">NA </p>
-                <p class="state-indicator" id="state-indicator-7">.</p>
-            </button>
-            <button class="config-btn" style = "display:inherit;" title="Open Settings" onclick = "window.location.href='config'">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
-                WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AQXEBEMPwb2mQAAAd9JREFUSMft1TtszmEUBvBftbTV
-                VtUtJKgBZTOIkAgDg61usRglYiFqEaNLXEJcYxUGjYS1gwiRYCAxmCQGl7CKREnQai3Pl7z58qX9
-                qhFLT/Ll/57zvf/znuc8z3n/TNk/sGloqYq1JD6uNdSxZye2YhBHi/hZtOMx7k0GwUZczroLN7AP
-                tzA78WtYP5lDFuJCFfLpVW26gnl/k3w12nAe87Ece9CJnuxZhRVYkH2dWFMvJ7uwPetj6MAmDAXF
-                EJowgjkYwGecxDCe4+Z4Krpe+CtxELuDrLR29ObXU8SvorE6aWnNqao1/gw8xQN8D/JleX5LvL1o
-                00x8CeIxrQn9RSv3F609nHVf8f+B4t3btSioNUzDeBYUUjF0R84NuBRfKq904QVG6zkE1oZgBRcf
-                cCRJ+uKLqprxE+vqkW5L5NgVfy8OFRyVnFQK2BwpixJPV19B1Uh+FeTBS7zBliQcxfs827Ahra2g
-                HcxBQ9UklzaChzgXNV1MITuCZkkO7cYnvEqr3gVBa9T4u0zaWKNlr7PpSYZxAG8xCz+wNIlaU/FX
-                nIgoPuL+RK+XuVXDWeuWOBWEY074WLYow1aR6J0oq7/goQOLJ/s96cW23ATHC1LP5Lp/hLv//cs4
-                ZROyP8wqWDrN15N3AAAAAElFTkSuQmCC">
-            </button>
-
-        </div>
-        <br/>
-        <br/>
-        <div id="footer" class=".item">
-            <p class="footer"> Automaton X1 - 1V0R03REF1720.<br/>
-                Automation Series Product Line.<br/>
-                <a style="color: rgb(68, 105, 163);">EMD SUBSYSTEMS</a> <br/>
-                </p>
-        </div>
-        
-    </div>
-</body>
-
-
-</html>
+</head><body><div class="center-1"><div class=".item">
+<h1> Control X1 </h1><h4> PLC - Controller </h4></div><div id="btn-container" class=".item">
+<button id="confBtn" class="config-btn" style="font-size:25px;padding:5px;color:#646464" onclick = "window.location.href='config'">⌥</button>
+</div><br/><br/><div class=".item, footer"> Automaton X1 - 1V0R03REF1720.<br/>Automation Series Product Line.
+<br/><a style="color:#4469a3;">EMD SUBSYSTEMS</a> <br/></div></div></body></html>

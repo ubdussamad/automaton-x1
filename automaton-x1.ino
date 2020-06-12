@@ -33,21 +33,43 @@ void setup() {
   // Mounting the file system.
   LOGL(STR("FS_INIT: ") + STR(SPIFFS.begin() ? "\nSucess" : "\nFailed"));
 
+  LOGL("Hi 1");
   /* Fetching Relay Sates */
-  LOG("Loading last Relay Sates: ");
+  LOGL("Loading last Relay Sates: ");
+  delay(100);
+
   File relay_states_f = SPIFFS.open(RELAY_STATE_FILE, "r");
-  if (!relay_states_f || RELAY_COUNT > relay_states_f.size()) {
+  if (!relay_states_f ) {//|| RELAY_COUNT > relay_states_f.size()) {
     LOG("Failed.");
   } else {
+    LOG("Sucess");
+    delay(30);
     int i = 0;
     while (relay_states_f.available()) {
+      
       pinMode(GPIOS[i], OUTPUT);
-      digitalWrite(GPIOS[i], (((char)relay_states_f.read() == '1') ? 1 : 0));
+      
+      LOG("Index: "+String(i)+"\n");
+      
+      char z = relay_states_f.read();
+
+
+      LOG("Bit is: " + String(z));
+
+      
+      delay(50);
+      
+      int c = (z=='1') ? HIGH : LOW;
+
+      digitalWrite(GPIOS[i], c );
+      LOGL("\n\n");
       i++;
     }
     relay_states_f.close();
     LOG("Sucess.");
   }
+
+    LOGL("HI 2");
 
   /* Loading Relay Names. */
   /* The last comma should be trimmed whle storage. */

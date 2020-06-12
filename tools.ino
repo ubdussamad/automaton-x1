@@ -42,16 +42,28 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
   /* Basic parsing of the request. */
 
   /* Most frequent request. */
+
+  LOGL("New Request: ");
+  LOG(requestHeader + "\n\n");
+  
+  
   int index = requestHeader.indexOf(F("/gpio"));
 
   if (index > 0) {
     int relayId = requestHeader.substring(index + 5).toInt();
+   
     if (DEBUG) {
       LOG("Relay Triggred.");
       LOGL(relayId);
     }
-    digitalWrite(relayId, !digitalRead(relayId));
+    int trig = !digitalRead(relayId) == 1 ? HIGH : LOW;
+    digitalWrite(relayId, trig );
+    LOGL("\n\nRelay id is: " + String(relayId) + "New State is " + String(relayId) + "\n");
     (*client).print(register_switch_states());
+    return;
+  }
+
+  if (requestHeader.indexOf(F("/favicon.ico")) > 0) {
     return;
   }
 
@@ -91,7 +103,6 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
     return;
   }
 
-
   if (requestHeader.indexOf(F("/burnnames")) > 0){
     int epch = requestHeader.indexOf(F("/burnnames/"));
     String dataBuffer = requestHeader.substring(epch); // Maybe it might need the end index
@@ -108,7 +119,7 @@ void requestHandler(const String &requestHeader, WiFiClient *client) {
 
   /* Fall back to homepage. */
 
-  (*client).print(F("<h1> Syserror, failed to load file.</h1>"));
+  LOGL("Redirecting to home.");
   serveFile("/control.html", client);
 }
 
@@ -119,9 +130,14 @@ void serveFile(const String &pathRefrence, WiFiClient *client) {
     Serial.println("Failed to load file.");
     (*client).print("ServerError: Page Not Found.");
   } else {
+    (*client).print("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n ");
+    String buffer = "";int count=1000;
     while (fileObject.available()) {
-      (*client).print((char)fileObject.read());
+      buffer+=(char)fileObject.read();
+      if(!count){(*client).print(buffer);count=1000;buffer="";}
+      count--;
     }
+    (*client).print(buffer);
     fileObject.close();
   }
 }
@@ -129,10 +145,11 @@ void serveFile(const String &pathRefrence, WiFiClient *client) {
 /* Routine for storing relay states in persistant mem. */
 /* This routine requires both hardware and firmaware tweaks. */
 String register_switch_states(void) {
-  String buffer, returnBuffer;
+  String buffer_, returnBuffer;
   for (int i = 0; i < RELAY_COUNT; i++) {
-    buffer += digitalRead(GPIOS[i]) ? '1' : '0';
-    returnBuffer += String(GPIOS[i]) +"%xef"+ pinNames[i] + ":" + (digitalRead(GPIOS[i]) ? "1," : "0,");
+    int state = digitalRead(GPIOS[i]);
+    buffer_ += state ? '1' : '0';
+    returnBuffer += String(GPIOS[i]) +"%xef"+ pinNames[i] + ":" + (state ? "1," : "0,") ;
   }
   /* Write the config file with the constant data. */
   File f = SPIFFS.open(RELAY_STATE_FILE, "w");
@@ -140,7 +157,7 @@ String register_switch_states(void) {
     Serial.println("ERROR:021");
     return (returnBuffer);
   }
-  f.print(buffer);
+  f.print(buffer_);
   f.close();
   return (returnBuffer);
 }

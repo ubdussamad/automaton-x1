@@ -19,8 +19,8 @@
 #define UID "002\n"
 
 
-#define RELAY_COUNT 3
-int GPIOS[RELAY_COUNT] = {4 , 5 , 14};// , 12 , 13 };
+#define RELAY_COUNT 4
+int GPIOS[RELAY_COUNT] = {4 , 5 , 14 , 12 };// , 13 };
 
 
 /* TIMEOUTS AND CONFIG [SUBJECT TO CHANGE DURING PRODUCTION] */

@@ -8,7 +8,7 @@
 */
 
 #include <ESP8266WiFi.h>
-#include "config.h"
+#include "config/config.h"
 #include "tools.h"
 #include <FS.h>
 

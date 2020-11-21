@@ -6,7 +6,7 @@
   Ref: 24APR20
   Author: ubdussamad <ubdussamad@gmail.com>
 */
-
+#include <vector>
 #include <ESP8266WiFi.h>
 #include "config/config.h"
 #include "tools.h"

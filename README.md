@@ -4,6 +4,9 @@
 
 Codebase and Hardware layouts for the Automaton X1 Project
 
+This codebase has been deprecated as it was deceptively simple yet pain to work with in long run. A new version with very generic constrcuts is being developed.
+I'll publish the newer one, when I finish it and the owner approves it's public realease.
+
 Copyright: 2019 Mohammmed S. <ubdussamad@gmail.com>
 
 This repository is published under Apache License.
